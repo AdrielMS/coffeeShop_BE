@@ -42,7 +42,7 @@ const productsModel = {
   getDetail: (id) => {
     return new Promise((resolve, reject) => {
       db.query(
-        `SELECT products.id, products.title, products.price, products.category,
+        `SELECT products.id, products.title, products.price, products.category, products.desc
       json_agg(row_to_json(product_image)) images FROM products INNER JOIN product_image ON products.id=product_image.id_product WHERE products.id='${id}' GROUP BY products.id `,
         (err, result) => {
           if (err) {
@@ -55,10 +55,10 @@ const productsModel = {
     });
   }, //end of getDetail function
   //add function
-  add: ({ title, file, price, category }) => {
+  add: ({ title, file, price, category, desc }) => {
     return new Promise((resolve, reject) => {
       db.query(
-        `INSERT INTO products (id, title, price, category) VALUES ('${uuidv4()}','${title}','${price}','${category}') RETURNING id`,
+        `INSERT INTO products (id, title, price, category, desc) VALUES ('${uuidv4()}','${title}','${price}','${category}','${desc}') RETURNING id`,
         (err, result) => {
           if (err) {
             return reject(err.message);
@@ -69,7 +69,7 @@ const productsModel = {
                 [uuidv4(), result.rows[0].id, title, file[index].filename]
               );
             }
-            return resolve({ title, images: file, price, category });
+            return resolve({ title, images: file, price, category, desc });
           }
         }
       );
