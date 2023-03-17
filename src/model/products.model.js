@@ -42,7 +42,7 @@ const productsModel = {
   getDetail: (id) => {
     return new Promise((resolve, reject) => {
       db.query(
-        `SELECT products.id, products.title, products.price, products.category, products.desc
+        `SELECT products.id, products.title, products.price, products.category, products.desc,
       json_agg(row_to_json(product_image)) images FROM products INNER JOIN product_image ON products.id=product_image.id_product WHERE products.id='${id}' GROUP BY products.id `,
         (err, result) => {
           if (err) {
