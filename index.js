@@ -5,11 +5,13 @@ const express = require("express");
 const app = express();
 const router = require("./src/route/index.route");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
+app.use(cors()); //enable CORS
+app.use(bodyParser.json());
 app.use(express.static("public")); //static file
 app.use(urlencoded({ extended: true })); //enable urlencoded
 app.use(json()); //enable json
-app.use(cors()); //enable CORS
 app.use("/api/v1/", router); //default prefix we use
 
 app.get("*", (req, res) => {
