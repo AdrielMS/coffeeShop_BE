@@ -1,15 +1,15 @@
 const { Client } = require("pg");
-const {USER, HOST, DATABASE, PASSWORD, PORT} = process.env
+const { DB_USER, DB_HOST, DB_DATABASE, DB_PASSWORD, DB_PORT } = process.env;
 
 const db = new Client({
-  user: USER,
+  user: DB_USER,
   // host: "localhost",
-  host: HOST,
+  host: DB_HOST,
   // database: "coffee_shop",
-  database: DATABASE,
+  database: DB_DATABASE,
   // password: "admin",
-  password: PASSWORD,
-  port: PORT,
+  password: DB_PASSWORD,
+  port: DB_PORT,
 });
 
 db.connect((err) => {

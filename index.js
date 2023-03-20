@@ -23,5 +23,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, (req, res) => {
-  console.log(`backend successfully running on port ${port}`);
+  console.log(`Coffeeshop backend successfully running on port ${port}`);
 });
