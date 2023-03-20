@@ -55,10 +55,10 @@ const productsModel = {
     });
   }, //end of getDetail function
   //add function
-  add: ({ title, file, price, category, desc }) => {
+  add: ({ title, file, price, category, description }) => {
     return new Promise((resolve, reject) => {
       db.query(
-        `INSERT INTO products (id, title, price, category, desc) VALUES ('${uuidv4()}','${title}','${price}','${category}','${desc}') RETURNING id`,
+        `INSERT INTO products (id, title, price, category, description) VALUES ('${uuidv4()}','${title}','${price}','${category}','${description}') RETURNING id`,
         (err, result) => {
           if (err) {
             return reject(err.message);
@@ -69,7 +69,13 @@ const productsModel = {
                 [uuidv4(), result.rows[0].id, title, file[index].filename]
               );
             }
-            return resolve({ title, images: file, price, category, desc });
+            return resolve({
+              title,
+              images: file,
+              price,
+              category,
+              description,
+            });
           }
         }
       );
