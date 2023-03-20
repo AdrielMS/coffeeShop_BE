@@ -6,6 +6,7 @@ const app = express();
 const router = require("./src/route/index.route");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const port = process.env.PORT || 5000;
 
 app.use(cors()); //enable CORS
 app.use(bodyParser.json());
@@ -21,6 +22,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(5000, (req, res) => {
-  console.log("backend successfully running on port 5000");
+app.listen(port, (req, res) => {
+  console.log(`backend successfully running on port ${port}`);
 });
